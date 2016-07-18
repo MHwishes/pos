@@ -21,4 +21,4 @@ let buildCartItems = (inputs, allItems)=> {
   }
 
   return cartItems;
-}
+};
