@@ -1,11 +1,11 @@
 'use strict';
 let buildCartItems = (inputs, allItems)=> {
   const cartItems = [];
+
   for (let input of inputs) {
     const splittedInput = input.split('-');
     const barcode = splittedInput[0];
     const count = parseFloat(splittedInput[1] || 1);
-
     const cartItem = cartItems.find((cartItem)=> {
       return cartItem.item.barcode === barcode;
     });
@@ -13,11 +13,12 @@ let buildCartItems = (inputs, allItems)=> {
       cartItem.count++;
     }
     else {
-      const item=allItems.find((allItem)=>{
-        return allItem.barcode===barcode;
+      const item = allItems.find((allItem)=> {
+        return allItem.barcode === barcode;
       });
-      cartItems.push({item:item,count:count});
+      cartItems.push({item: item, count: count});
     }
   }
+
   return cartItems;
 }
