@@ -36,7 +36,7 @@ describe('pos', () => {
   });
 
 
-  it('findCartItems', ()=> {
+  it('buildCartItems', ()=> {
     var allItems = loadAllItems();
     var cartItems = buildCartItems(inputs, allItems);
     const expectCartItems = [
@@ -69,6 +69,54 @@ describe('pos', () => {
       }
     ];
     expect(cartItems).toEqual(expectCartItems);
+  });
+
+
+  it('buildReceiptItems', ()=> {
+    const promotions = loadPromotions();
+    const cartItems = buildCartItems(inputs, loadAllItems());
+    var receiptItems = buildReceiptItems(cartItems,promotions);
+    var expectReceiptItems = [{
+      cartItem: {
+        item: {
+          barcode: 'ITEM000001',
+          name: '雪碧',
+          unit: '瓶',
+          price: 3.00
+        },
+        count: 5
+      },
+      subtotal: 12,
+      save: 3
+    },
+      {
+        cartItem: {
+          item: {
+            barcode: 'ITEM000003',
+            name: '荔枝',
+            unit: '斤',
+            price: 15.00
+          },
+          count: 2
+        },
+        subtotal: 30,
+        save: 0
+      },
+      {
+        cartItem: {
+          item: {
+            barcode: 'ITEM000005',
+            name: '方便面',
+            unit: '袋',
+            price: 4.50
+          },
+          count: 3
+        },
+        subtotal: 9,
+        save: 4.5
+      }
+    ];
+    expect(receiptItems).toEqual(expectReceiptItems);
   });
 
 });
